@@ -35,7 +35,7 @@ set_target_properties(${target}  PROPERTIES FOLDER "test")
 
 #设置链接库
 if(WIN32)
-#target_link_libraries(${target}  curl_http_client)
+target_link_libraries(${target}  hashlib)
 else()
 #
 endif()

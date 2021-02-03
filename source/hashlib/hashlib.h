@@ -1,13 +1,13 @@
 
 #include "i_hashlib.h"
-
+#include <unordered_map>
 #ifndef __HASHLIB_
 #define __HASHLIB_
 
 
 namespace hashlib {
 
-class DLL_API HashLib :public IHashLib
+class HashLib :public IHashLib
 {
 public:
 	HashLib();
@@ -28,8 +28,12 @@ public:
 	bool init();
 	virtual int update(const std::string& data);
 	virtual bool digest(std::string& digest);
-	virtual bool hexdigest(std::string& digest);
+	virtual std::string hexdigest();
 	virtual bool copy(std::string& digest);
+private:
+	bool genDigest();
+private:
+	static std::unordered_map<DigestType, const int> mdtype2len;
 private:
 	DigestType m_digestType;
 	std::string m_disgest;

@@ -1,12 +1,9 @@
-#add by jzf@2021-02-02
-#
 #设置工程名
-set(target "hashlib")
-set(OUTPUT_NAME "hashlib")
-
-add_definitions(-D DLL_EXPORT_HASHLIB)
+set(target "SymmetricEncryptionTest")
+set(OUTPUT_NAME "SymmetricEncryptionTest")
 
 #设置包含头文件路径
+include_directories(${CURL_INCLUDE_PATH})
 include_directories(${OPENSSL_INCLUDE_PATH})
 include_directories("${PROJECT_SOURCE_DIR}/include")
 #搜索文件，并设置工程目录
@@ -28,13 +25,13 @@ ${SOURCES}
 )
 
 #作为动态库
-add_library(${target} SHARED ${ALL_LIST})
+add_executable(${target} ${ALL_LIST})
 
 #设置项目属性
 set_target_properties(${target}  PROPERTIES ARCHIVE_OUTPUT_NAME "${OUTPUT_NAME}")
 set_target_properties(${target}  PROPERTIES LIBRARY_OUTPUT_NAME "${OUTPUT_NAME}")
 set_target_properties(${target}  PROPERTIES RUNTIME_OUTPUT_NAME "${OUTPUT_NAME}")
-set_target_properties(${target}  PROPERTIES FOLDER "hashlib")
+set_target_properties(${target}  PROPERTIES FOLDER "test")
 
 #设置链接库
 if(WIN32)
