@@ -99,3 +99,34 @@ A joke.守教最高机密=，=
             - 用发送方公钥对ckey1解密得到md1
             - 对p1进行hash得到md2
             - 对比md1和md2
+- @2021-02-05 openssl-1.1.1i分析
+    - 根据算法名称获取算法结构
+        - EVP_get_digestbyname
+        - EVP_get_cipherbyname
+    - 根据算法NID获取算法结构
+        - EVP_get_cipherbynid
+    - 根据ASN1_OBJECT结构获取算法结构
+        - EVP_get_cipherbyobj
+    - 所在路径
+        - openssl-1.1.1i\include\openssl\obj_mac.h
+- @2021-02-05 加盐
+    - EVP_BytesToKey 从各种参数派生密钥和IV
+    -  函数分析 
+        ```c++
+        #include <openssl/evp.h>
+        // type : 使用key和iv的加密算法
+        // md   : 要使用的摘要算法
+        // salt ：被用作推导盐，如果不使用盐应该指向一个8字节缓冲器或NULL。
+        // data ：密码明文
+        // data1: 密码明文长度
+        // count: 迭代次数
+        // key  : 派生的密钥将写入key.
+        // iv   : 派生的IV将写入iv。
+        int EVP_BytesToKey(const EVP_CIPHER *type, const EVP_MD *md,
+                            const unsigned char *salt,
+                            const unsigned char *data, int datal, int count,
+                            unsigned char *key, unsigned char *iv);
+        ```
+    - 一篇知乎文章
+        - >https://zhuanlan.zhihu.com/p/22860282?from_voters_page=true
+        
