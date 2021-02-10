@@ -129,4 +129,30 @@ A joke.守教最高机密=，=
         ```
     - 一篇知乎文章
         - >https://zhuanlan.zhihu.com/p/22860282?from_voters_page=true
+
+- @2021-02-07 关于非对称加密
+    - 公钥加密，私钥解密
+        - EVP_PKEY_encrypt
+        - EVP_PKEY_decrypt
+    - 私钥签名，公钥验证
+        - EVP_PKEY_assign
+        - EVP_SignFinal
+        - EVP_VerifyFinal
+    - 数字信封
+        - 制作信封
+            - EVP_SealInit
+            - EVP_SealUpdate
+            - EVP_SealFinal
+        - 解开信封
+            - EVP_OpenInit
+            - EVP_OpenUpdate
+            - EVP_OpenFinal
+- @2021-02-07 编解码
+    - 常用编解码方式
+        - base64
+        - utf
+        - ascii
+        - multiasc
+- @2021-02-10 增加了公钥算法的签名和验证
+
         

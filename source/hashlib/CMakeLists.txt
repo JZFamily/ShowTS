@@ -10,7 +10,7 @@ add_definitions(-D DLL_EXPORT_HASHLIB)
 include_directories(${OPENSSL_INCLUDE_PATH})
 include_directories("${PROJECT_SOURCE_DIR}/include")
 #搜索文件，并设置工程目录
-file(GLOB PUBLICS  "${PROJECT_SOURCE_DIR}/include/*.h")
+file(GLOB PUBLICS  "${PROJECT_SOURCE_DIR}/include/hashlib/*.h")
 source_group("public"  FILES  ${PUBLICS})
 
 file(GLOB HEADERS  "*.h")

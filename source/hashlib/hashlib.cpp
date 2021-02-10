@@ -185,6 +185,7 @@ namespace hashlib {
 		{
 			return "";
 		}
+		//OPENSSL_hexstr2buf
 		std::stringstream ss;
 		for (auto& item : m_disgest)
 		{

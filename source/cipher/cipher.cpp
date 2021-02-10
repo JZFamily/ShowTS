@@ -19,7 +19,7 @@ namespace cipher {
 		,m_cipherName(cipherName)
 	{
 		m_cipher = EVP_get_cipherbyname(cipherName.c_str());
-		if (!m_cipher) {
+		if (m_cipher == nullptr) {
 			throw std::runtime_error("get cipher failed!");
 		}
 		m_ctx = EVP_CIPHER_CTX_new();
@@ -77,7 +77,7 @@ namespace cipher {
 	{
 		if (iStream.rdstate() != std::ios::goodbit || oStream.rdstate() != std::ios::goodbit)
 		{
-			std::cerr << "file rdstate not good!" << std::endl;
+			std::cerr << __FUNCTION__<< " file rdstate not good!" << std::endl;
 			return 0;
 		}
 
@@ -90,13 +90,13 @@ namespace cipher {
 		int size = 0;
 		while (iStream.read(in, len))
 		{
-			size = iStream.gcount();
+			size = static_cast<int>(iStream.gcount());
 			int ret = EVP_CipherUpdate(m_ctx, out, &oLen, (unsigned char*)in, size);
 			oStream.write((const char*)out, oLen);
 		}
 		if (iStream.eof())
 		{
-			size = iStream.gcount();
+			size = static_cast<int>(iStream.gcount());
 			int ret = EVP_CipherUpdate(m_ctx, out, &oLen, (unsigned char*)in, size);
 			oStream.write((const char*)out, oLen);
 		}
@@ -118,7 +118,7 @@ namespace cipher {
 	{
 		if (oStream.rdstate() != std::ios::goodbit)
 		{
-			std::cerr << "file rdstate not good!" << std::endl;
+			std::cerr << __FUNCTION__ << "file rdstate not good!" << std::endl;
 			return 0;
 		}
 		int oLen = EVP_CIPHER_CTX_block_size(m_ctx);

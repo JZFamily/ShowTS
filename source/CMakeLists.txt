@@ -1,6 +1,7 @@
 add_subdirectory(test)
 add_subdirectory(message_digest)
 add_subdirectory(hashlib)
+add_subdirectory(pkey)
 add_subdirectory(asymmetric_encryption)
 add_subdirectory(symmetric_encryption)
 add_subdirectory(cipher)
